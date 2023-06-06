@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400&display=swap");
+
+* {
+  /* font-family: "Work Sans", sans-serif; */
+  font-family: "Work Sans", sans-serif;
+}
+.app {
+  min-height: 100vh;
+  /* background: url("../src/assets/cool-background.png"); */
+  background: url("../src/assets/ChatAppBg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+h1 {
+  color: red;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+.messsages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+.marginRight {
+  margin-right: 0.5rem;
+}
+/* preloader  */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

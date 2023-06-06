@@ -1,0 +1,33 @@
+import React from "react";
+import { chatState } from "../../Context/chatProvider";
+import { Box } from "@chakra-ui/react";
+import SingleChat from "./SingleChat";
+const ChatBox = ({ fetchAgain, setFetchAgain, bg, color,chatBg }) => {
+  const { selectedChat } = chatState();
+  return (
+    <>
+      {/* if chat is selected then this box is shown else it is hidden (it is only apply for smaller size device) */}
+      <Box
+        display={{ base: selectedChat ? "flex" : "none", md: "flex" }}
+        alignItems="center"
+        flexDir="column"
+        p={3}
+        bg={bg}
+        color={color}
+        w={{ base: "100%", md: "68%" }}
+        borderRadius="lg"
+        borderWidth="1px"
+      >
+        {/* sending parent state from   chats -> chatBox -> SingleChat */}
+        <SingleChat
+          fetchAgain={fetchAgain}
+          setFetchAgain={setFetchAgain}
+          bg={bg}
+          color={color}
+          chatBg={chatBg}
+        />
+      </Box>
+    </>
+  );
+};
+export default ChatBox;
