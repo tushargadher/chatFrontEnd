@@ -23,8 +23,10 @@ const Chats = () => {
   const bg = useColorModeValue("white", "gray.600");
   const color = useColorModeValue("black", "white");
   const chatBg = useColorModeValue("#E8E8E8", "gray.300");
+  
 
   return (
+    
     <>
       <div style={{ width: "100%" }}>
         {user && (
