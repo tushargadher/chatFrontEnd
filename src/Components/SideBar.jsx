@@ -30,6 +30,7 @@ import AlertUser from "./AlertUser";
 import { getSender } from "../../Config/chatLogic";
 import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
+import GroupChatModel from "./GroupChatModel";
 const SideBar = ({ bg, color, toggleColorMode }) => {
   const [search, setSearch] = useState("");
   const [result, setResult] = useState([]);
@@ -137,9 +138,9 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
         bg={bg}
         color={color}
         w="100%"
-        p="5px 10px"
-        // borderRadius="lg"
+        p={{ base: "0.1rem", md: "0.4rem" }}
         borderWidth="5px"
+        borderColor={bg}
       >
         {/* search user */}
         <Tooltip label="Search user to chat" hasArrow placement="bottom-end">
@@ -202,24 +203,37 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
 
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              <Avatar name={user.name} src={user.pic} size="sm" />
+              <Box display={{ base: "flex", md: "none" }}>
+                <i class="fa-solid fa-gear"></i>
+              </Box>
+              <Avatar
+                name={user.name}
+                src={user.pic}
+                size="sm"
+                display={{ base: "none", md: "flex" }}
+              />
             </MenuButton>
             <MenuList>
               <ProfileModel user={user}>
-                <MenuItem>
-                  <i class="fa-solid fa-user marginRight"></i>Profile
+                <MenuItem paddingY={2}>
+                  <i className="fa-solid fa-user marginRight"></i>Profile
                 </MenuItem>
               </ProfileModel>
-              {/* <MenuItem onClick={toggleColorMode}>Switch Theme</MenuItem> */}
 
+              <GroupChatModel>
+                <MenuItem paddingY={2}>
+                  <i className="fa-solid fa-user-group marginRight"></i>
+                  New Group
+                </MenuItem>
+              </GroupChatModel>
               <AlertUser handleLogout={handleLogout}>
-                <MenuItem>
-                  <i class="fa-sharp fa-solid fa-arrow-right-from-bracket marginRight"></i>
+                <MenuItem paddingY={2}>
+                  <i className="fa-sharp fa-solid fa-arrow-right-from-bracket marginRight"></i>
                   Log Out
                 </MenuItem>
               </AlertUser>
-              <MenuItem>
-                <i class="fa-regular fa-trash-can marginRight"></i>Delete
+              <MenuItem paddingY={2}>
+                <i className="fa-regular fa-trash-can marginRight"></i>Delete
                 Account
               </MenuItem>
             </MenuList>

@@ -4,9 +4,8 @@ import { Text, useToast } from "@chakra-ui/react";
 import { Box, Button, Stack } from "@chakra-ui/react";
 import ChatLoading from "./ChatLoading";
 import axios from "axios";
-import { AddIcon } from "@chakra-ui/icons";
 import { getSender } from "../../Config/chatLogic";
-import GroupChatModel from "./GroupChatModel";
+
 const MyChats = ({ fetchAgain, bg, color, chatBg }) => {
   const {
     user,
@@ -62,8 +61,9 @@ const MyChats = ({ fetchAgain, bg, color, chatBg }) => {
       bg={bg}
       color={color}
       w={{ base: "100%", md: "31%" }}
-      borderRadius="lg"
       borderWidth="1px"
+      borderColor={bg}
+      borderTopColor="gray.600"
     >
       <Box
         pb={3}
@@ -75,15 +75,6 @@ const MyChats = ({ fetchAgain, bg, color, chatBg }) => {
         alignItems="center"
       >
         Chats
-        <GroupChatModel>
-          <Button
-            d="flex"
-            fontSize={{ base: "17px", md: "10px", lg: "17px" }}
-            rightIcon={<AddIcon />}
-          >
-            New Group
-          </Button>
-        </GroupChatModel>
       </Box>
       <Box
         display="flex"
@@ -102,11 +93,12 @@ const MyChats = ({ fetchAgain, bg, color, chatBg }) => {
                 onClick={() => setSeletedChat(chat)}
                 cursor="pointer"
                 bg={selectedChat === chat ? "#38B2AC" : `${chatBg}`}
-                color={selectedChat === chat ? "white" : "black"}
+                // color={selectedChat === chat ? "white" : "black"}
                 px={3}
                 py={2}
-                borderRadius="lg"
+                borderRadius="md"
                 key={chat._id}
+                color={color}
               >
                 {/* {console.log([chat])} */}
                 <Text>
