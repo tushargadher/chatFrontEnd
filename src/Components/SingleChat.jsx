@@ -15,6 +15,7 @@ import {
   getSenderFull,
   getSenderProfile,
 } from "../../Config/chatLogic";
+import icon from "../assets/icon.png";
 import ProfileModel from "./../Components/ProfileModel";
 import ScrollableChats from "./ScrollableChats";
 import UpdateGroupModel from "./UpdateGroupModel";
@@ -74,12 +75,39 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
         if (!notification.includes(newMessageRecieved)) {
           setNotification([newMessageRecieved, ...notification]);
           setFetchAgain(!fetchAgain);
+          // showNotifiction
+          console.log(newMessageRecieved);
+          showNotifiction(newMessageRecieved);
         }
       } else {
         setMessages([...messages, newMessageRecieved]);
       }
     });
   });
+
+  //display notification
+  const showNotifiction = (msgData) => {
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+      if (navigator.vibrate) {
+        window.navigator.vibrate(200);
+      }
+      const notification = new Notification("ChatBox", {
+        body: msgData.content,
+        icon: icon,
+      });
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          const notification = new Notification("ChatBox", {
+            body: msgData.content,
+            icon: icon,
+          });
+        }
+      });
+    }
+  };
 
   const fetchAllmessage = async () => {
     if (!selectedChat) {

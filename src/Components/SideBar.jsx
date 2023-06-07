@@ -14,6 +14,7 @@ import {
   Input,
   Spinner,
 } from "@chakra-ui/react";
+
 import { BellIcon, ChevronDownIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Tooltip } from "@chakra-ui/react";
 import React, { useState } from "react";
@@ -204,7 +205,7 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
               <Box display={{ base: "flex", md: "none" }}>
-                <i class="fa-solid fa-gear"></i>
+                <i className="fa-solid fa-gear"></i>
               </Box>
               <Avatar
                 name={user.name}
