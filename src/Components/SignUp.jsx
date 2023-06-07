@@ -13,6 +13,7 @@ import { useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { chatState } from "../../Context/chatProvider";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 const SignUp = () => {
   const navigate = useNavigate();
   const toast = useToast();
@@ -33,7 +34,6 @@ const SignUp = () => {
 
   const postDetails = (pics) => {
     setLoading(true);
-   
 
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
       //calling api to store profile picture
@@ -151,27 +151,29 @@ const SignUp = () => {
   return (
     <VStack spacing="1rem">
       <FormControl id="name" isRequired>
-        <FormLabel>Name</FormLabel>
+        <FormLabel color="black">Name</FormLabel>
         <Input
           placeholder="Enter Your name"
           name="name"
           onChange={handleChange}
           value={credentials.name}
+          borderColor="gray.300"
         />
       </FormControl>
 
       <FormControl id="email" isRequired>
-        <FormLabel>Email</FormLabel>
+        <FormLabel color="black">Email</FormLabel>
         <Input
           placeholder="Enter Your Email"
           name="email"
           onChange={handleChange}
           value={credentials.email}
+          borderColor="gray.300"
         />
       </FormControl>
 
       <FormControl id="password" isRequired>
-        <FormLabel>Password</FormLabel>
+        <FormLabel color="black">Password</FormLabel>
         <InputGroup>
           <Input
             type={show ? "text" : "password"}
@@ -179,17 +181,18 @@ const SignUp = () => {
             onChange={handleChange}
             value={credentials.password}
             placeholder="Enter Password"
+            borderColor="gray.300"
           />
           <InputRightElement width="4.5rem ">
             <Button h="1.75rem" size="sm" onClick={handleShow}>
-              {show ? "Hide" : "Show"}
+              {show ? <ViewOffIcon /> : <ViewIcon />}
             </Button>
           </InputRightElement>
         </InputGroup>
       </FormControl>
 
       <FormControl id="cpassword" isRequired>
-        <FormLabel>Confrom Password</FormLabel>
+        <FormLabel color="black">Confrom Password</FormLabel>
         <InputGroup>
           <Input
             type={show ? "text" : "password"}
@@ -197,23 +200,25 @@ const SignUp = () => {
             onChange={handleChange}
             value={credentials.cpassword}
             placeholder="Enter Password"
+            borderColor="gray.300"
           />
-          <InputRightElement width="4.5rem ">
+          <InputRightElement width="4.5rem " color="black">
             <Button h="1.75rem" size="sm" onClick={handleShow}>
-              {show ? "Hide" : "Show"}
+            {show ? <ViewOffIcon /> : <ViewIcon />}
             </Button>
           </InputRightElement>
         </InputGroup>
       </FormControl>
 
       <FormControl id="image" isRequired>
-        <FormLabel>Upload Profile Picture</FormLabel>
+        <FormLabel color="black">Upload Profile Picture</FormLabel>
         <Input
           type="file"
           accept="image/*"
           p={1.5}
           onChange={(e) => postDetails(e.target.files[0])}
           border="none"
+          color="black"
         />
       </FormControl>
 

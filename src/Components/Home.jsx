@@ -25,8 +25,8 @@ const Home = () => {
     }
   });
   return (
-    <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
-      <Flex flex={1}>
+    <>
+      {/* <Flex flex={1}>
         <Image
           alt={"Login Image"}
           objectFit={"cover"}
@@ -34,34 +34,24 @@ const Home = () => {
             "https://images.unsplash.com/photo-1640244674671-f32e0f186e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
           }
         />
-      </Flex>
-      <Flex
-        p={4}
-        flex={1}
-        direction="column"
-        align={"center"}
-        justify={"center"}
-      >
+      </Flex> */}
+      <Container maxW="xl" centerContent>
         <Box
           p={3}
           bg={"white"}
           color="black"
-          w={{ base: "100%", md: "80%" }}
-          m="0px 0 15px 0"
+          w={"100%"}
+          m="40px 0 15px 0"
           borderRadius="md"
           borderWidth="1px"
+          d="flex"
+          justifyContent="center"
         >
           <Text fontSize={{ base: "2xl", md: "4xl" }} textAlign="center">
             Welcome to ChatBox
           </Text>
         </Box>
-        <Box
-          bg={"white"}
-          w={{ base: "100%", md: "80%" }}
-          p={4}
-          borderRadius="md"
-          borderWidth="1px"
-        >
+        <Box bg={"white"} w={"100%"} borderRadius="md" borderWidth="1px" p={4}>
           <Tabs variant="soft-rounded" isFitted>
             <TabList>
               <Tab>Login</Tab>
@@ -77,8 +67,8 @@ const Home = () => {
             </TabPanels>
           </Tabs>
         </Box>
-      </Flex>
-    </Stack>
+      </Container>
+    </>
   );
 };
 export default Home;

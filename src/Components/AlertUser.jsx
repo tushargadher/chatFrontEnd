@@ -19,11 +19,16 @@ const AlertUser = ({ children, handleLogout }) => {
     <>
       {children ? <span onClick={onOpen}>{children}</span> : <></>}
 
-      <AlertDialog isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false} >
+      <AlertDialog
+        isOpen={isOpen}
+        onClose={onClose}
+        closeOnOverlayClick={false}
+        isCentered
+      >
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Attention...! {user.name}.
+              Are you sure?
             </AlertDialogHeader>
 
             <AlertDialogBody>

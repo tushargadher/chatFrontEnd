@@ -203,16 +203,8 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
           {/* user profile menu */}
 
           <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              <Box display={{ base: "flex", md: "none" }}>
-                <i className="fa-solid fa-gear"></i>
-              </Box>
-              <Avatar
-                name={user.name}
-                src={user.pic}
-                size="sm"
-                display={{ base: "none", md: "flex" }}
-              />
+            <MenuButton as={Button}>
+              <i className="fa-solid fa-gear"></i>
             </MenuButton>
             <MenuList>
               <ProfileModel user={user}>

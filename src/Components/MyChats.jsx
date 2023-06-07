@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { chatState } from "../../Context/chatProvider";
 import { Text, useToast } from "@chakra-ui/react";
-import { Box, Button, Stack } from "@chakra-ui/react";
+import { Box, Button, Stack, Avatar } from "@chakra-ui/react";
 import ChatLoading from "./ChatLoading";
 import axios from "axios";
-import { getSender } from "../../Config/chatLogic";
+import { getSender, getSenderProfile } from "../../Config/chatLogic";
 
 const MyChats = ({ fetchAgain, bg, color, chatBg }) => {
   const {
@@ -32,9 +32,8 @@ const MyChats = ({ fetchAgain, bg, color, chatBg }) => {
         `${server}/api/chat`, //if the key and value are same then no need to write both
         config
       );
-      // console.log(data);
+
       setChats(data);
-      // console.log(data);
     } catch (error) {
       toast({
         title: "Error Occured while Fetching the Chats",
@@ -99,14 +98,32 @@ const MyChats = ({ fetchAgain, bg, color, chatBg }) => {
                 borderRadius="md"
                 key={chat._id}
                 color={color}
+                display="flex"
+                alignItems="center"
               >
-                {/* {console.log([chat])} */}
-                <Text>
-                  {/* if chat is groupchat then display groupchat name else display sender name */}
-                  {!chat.isGroupChat
-                    ? getSender(loggedUser, chat.users)
-                    : chat.chatName}
-                </Text>
+                <Avatar
+                  src={getSenderProfile(loggedUser, chat.users)}
+                  size={{ base: "sm", md: "md" }}
+                  marginRight={3}
+                ></Avatar>
+                <Box>
+                  <Text fontWeight={"bold"}>
+                    {/* if chat is groupchat then display groupchat name else display sender name */}
+                    {!chat.isGroupChat
+                      ? getSender(loggedUser, chat.users)
+                      : chat.chatName}
+                  </Text>
+
+                  <Text opacity="0.7">
+                    {chat.latestMessage && (
+                      <>
+                        {chat.latestMessage.content.length > 50
+                          ? chat.latestMessage.content.substring(0, 51) + "..."
+                          : chat.latestMessage.content}
+                      </>
+                    )}
+                  </Text>
+                </Box>
               </Box>
             ))}
           </Stack>

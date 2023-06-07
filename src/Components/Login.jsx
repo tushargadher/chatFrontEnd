@@ -13,7 +13,7 @@ import { useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { chatState } from "../../Context/chatProvider";
-
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 const Login = () => {
   const { server } = chatState();
   const toast = useToast();
@@ -90,27 +90,21 @@ const Login = () => {
     }
   };
 
-  const setGuest = () => {
-    setCredentials({
-      email: "guestuser123@gmail.com",
-      password: "123456",
-    });
-  };
   return (
-    <VStack spacing="1rem" color="black">
+    <VStack spacing="0.7rem" color="black">
       <FormControl id="email" isRequired>
-        <FormLabel>Email</FormLabel>
+        <FormLabel color="black">Email</FormLabel>
         <Input
           placeholder="Enter Your Email"
           name="email"
           onChange={handleChange}
           value={credentials.email}
-          color="black"
+          borderColor="gray.300"
         />
       </FormControl>
 
       <FormControl id="password" isRequired>
-        <FormLabel>Password</FormLabel>
+        <FormLabel color="black">Password</FormLabel>
         <InputGroup>
           <Input
             type={show ? "text" : "password"}
@@ -118,10 +112,12 @@ const Login = () => {
             onChange={handleChange}
             value={credentials.password}
             placeholder="Enter Password"
+            color="black"
+            borderColor="gray.300"
           />
           <InputRightElement width="4.5rem ">
             <Button h="1.75rem" size="sm" onClick={handleShow}>
-              {show ? "Hide" : "Show"}
+              {show ? <ViewOffIcon /> : <ViewIcon />}
             </Button>
           </InputRightElement>
         </InputGroup>
@@ -130,20 +126,11 @@ const Login = () => {
       <Button
         colorScheme="blue"
         width="100%"
-        style={{ marginTop: 15 }}
+        style={{ marginTop: 30 }}
         onClick={handleSubmit}
         isLoading={loading}
       >
-        <Text fontWeight={300}>Login</Text>
-      </Button>
-
-      <Button
-        colorScheme="red"
-        width="100%"
-        style={{ marginTop: 15 }}
-        onClick={setGuest}
-      >
-        <Text fontWeight={300}>Get Guest User Credentials</Text>
+        <Text fontWeight={400}>Login</Text>
       </Button>
     </VStack>
   );
