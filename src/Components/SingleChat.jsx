@@ -75,31 +75,14 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
         if (!notification.includes(newMessageRecieved)) {
           setNotification([newMessageRecieved, ...notification]);
           setFetchAgain(!fetchAgain);
-          // showNotifiction
           console.log(newMessageRecieved);
-          showNotifiction(newMessageRecieved);
         }
       } else {
         setMessages([...messages, newMessageRecieved]);
       }
     });
   });
-  navigator.serviceWorker.register("sw.js");
-  //display notification
-  const showNotifiction = (msgData) => {
-    Notification.requestPermission(function (result) {
-      if (result === "granted") {
-        navigator.serviceWorker.ready.then(function (registration) {
-          registration.showNotification("ChatBox", {
-            body: msgData.chat.isGroupChat
-              ? `New Message in ${msgData.chat.chatName}`
-              : `New Message From ${getSender(user, msgData.chat.users)}`,
-            icon: icon,
-          });
-        });
-      }
-    });
-  };
+
 
   const fetchAllmessage = async () => {
     if (!selectedChat) {

@@ -185,6 +185,7 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
                 <MenuItem
                   key={notify._id}
                   onClick={() => {
+                    //to open chat when user click on notification
                     setSeletedChat(notify.chat);
                     //removing notification after user click on it
                     setNotification(notification.filter((n) => n !== notify));
@@ -267,7 +268,21 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
                 />
               ))
             )}
-            {loadingChat && <Spinner ml="auto" display="flex" />}
+            {loadingChat && (
+              <>
+                <Box display="flex" alignItems="center">
+                  <Spinner
+                    thickness="3px"
+                    speed="0.65s"
+                    emptyColor="gray.200"
+                    color="blue.500"
+                    size="md"
+                    margin={2}
+                  />
+                  <Text>Please Wait...</Text>
+                </Box>{" "}
+              </>
+            )}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
