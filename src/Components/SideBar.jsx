@@ -147,7 +147,7 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
         <Tooltip label="Search user to chat" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>
             <i className="fa-sharp fa-solid fa-magnifying-glass"></i>
-            <Text display={{ base: "none", md: "flex" }} px="4">
+            <Text display={{ base: "none", md: "flex" }} px="4" >
               Search User
             </Text>
           </Button>
@@ -155,7 +155,7 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
 
         {/* app name */}
         <Text fontSize="2xl" display={{ base: "none", md: "flex" }}>
-          React Chat App
+        ChatBox 
         </Text>
         {/* <Text>Add Delete user functionality</Text> */}
 
@@ -226,10 +226,7 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
                   Log Out
                 </MenuItem>
               </AlertUser>
-              <MenuItem paddingY={2}>
-                <i className="fa-regular fa-trash-can marginRight"></i>Delete
-                Account
-              </MenuItem>
+         
             </MenuList>
           </Menu>
         </Box>

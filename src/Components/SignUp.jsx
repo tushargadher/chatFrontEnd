@@ -158,6 +158,7 @@ const SignUp = () => {
           onChange={handleChange}
           value={credentials.name}
           borderColor="gray.300"
+          color="black"
         />
       </FormControl>
 
@@ -169,6 +170,7 @@ const SignUp = () => {
           onChange={handleChange}
           value={credentials.email}
           borderColor="gray.300"
+          color="black"
         />
       </FormControl>
 
@@ -182,9 +184,10 @@ const SignUp = () => {
             value={credentials.password}
             placeholder="Enter Password"
             borderColor="gray.300"
+            color="black"
           />
           <InputRightElement width="4.5rem ">
-            <Button h="1.75rem" size="sm" onClick={handleShow}>
+            <Button h="1.75rem" size="sm" onClick={handleShow} color="black">
               {show ? <ViewOffIcon /> : <ViewIcon />}
             </Button>
           </InputRightElement>
@@ -201,6 +204,7 @@ const SignUp = () => {
             value={credentials.cpassword}
             placeholder="Enter Password"
             borderColor="gray.300"
+            color="black"
           />
           <InputRightElement width="4.5rem " color="black">
             <Button h="1.75rem" size="sm" onClick={handleShow}>

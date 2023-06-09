@@ -8,7 +8,8 @@ import {
   FormControl,
   Input,
   InputGroup,
-  InputRightAddon,
+  InputRightElement,
+  Button,
 } from "@chakra-ui/react";
 import {
   getSender,
@@ -82,7 +83,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
       }
     });
   });
-
 
   const fetchAllmessage = async () => {
     if (!selectedChat) {
@@ -285,13 +285,17 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
                   value={newMessage}
                   color="black"
                 />
-                <InputRightAddon
-                  children="Send"
-                  onClick={sendMessage}
-                  cursor="pointer"
-                  bg="gray.200"
-                  color="black"
-                />
+                <InputRightElement>
+                  <Button
+                    onClick={sendMessage}
+                    cursor="pointer"
+                    bg="gray.300"
+                    color="black"
+                  >
+                    <i class="fa-regular fa-paper-plane"></i>
+                  </Button>
+                </InputRightElement>
+              
               </InputGroup>
             </FormControl>
           </Box>

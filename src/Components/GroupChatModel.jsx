@@ -188,7 +188,7 @@ const GroupChatModel = ({ children }) => {
             {/* add user  */}
             <FormControl>
               <Input
-                placeholder="Add Users eg: Tushar,Anil,Hiral"
+                placeholder="Search User To Add"
                 onChange={(e) => {
                   setSearch(e.target.value);
                   hanldeSearch();
