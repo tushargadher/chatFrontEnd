@@ -11,6 +11,10 @@ import {
   InputRightElement,
   Button,
   Img,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 import {
   getSender,
@@ -88,6 +92,60 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
       }
     });
   });
+
+  const handleRemove = async (user2) => {
+    if (selectedChat.groupAdmin._id !== user._id && user2._id !== user._id) {
+      toast({
+        title: "Only Group Admin can Remove or Add Users",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
+    try {
+      setLoading(true);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      //api call, return all user expect the logged in user
+      const { data } = await axios.put(
+        `${server}/api/chat/groupremove`,
+        {
+          userID: user2._id,
+          groupID: selectedChat._id,
+        },
+        config
+      );
+
+      //this function is also called when user click on leave that's why this below condition is included
+      user2._id === user._id ? setSeletedChat() : setSeletedChat(data);
+      setFetchAgain(!fetchAgain);
+      fetchAllmessage();
+      console.log(data);
+      setLoading(false);
+      toast({
+        title: `Group Deleted successfully.`,
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    } catch (error) {
+      setLoading(false);
+      toast({
+        title: "Error While Adding User!",
+        description: error.response.data,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  };
 
   const fetchAllmessage = async () => {
     if (!selectedChat) {
@@ -208,14 +266,43 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
             />
             {selectedChat.isGroupChat ? (
               <>
-                {selectedChat.chatName}
-                <UpdateGroupModel
-                  fetchAgain={fetchAgain}
-                  setFetchAgain={setFetchAgain}
-                  fetchAllmessage={fetchAllmessage}
-                  bg={bg}
-                  color={color}
-                />
+                <Box>
+                  <Text fontSize="2xl">{selectedChat.chatName}</Text>
+                  <Box display="flex">
+                    {selectedChat.users.map((member) => (
+                      <Text fontSize="xs" opacity="0.8">{member.name} ,</Text>
+                    ))}
+                  </Box>
+                </Box>
+                <Menu>
+                  <MenuButton
+                    as={IconButton}
+                    aria-label="Options"
+                    variant="ghost"
+                  >
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </MenuButton>
+                  <MenuList fontWeight="light" fontSize="sm">
+                    <UpdateGroupModel
+                      fetchAgain={fetchAgain}
+                      setFetchAgain={setFetchAgain}
+                      fetchAllmessage={fetchAllmessage}
+                      bg={bg}
+                      color={color}
+                    >
+                      <MenuItem paddingY={2}>Group Setting</MenuItem>
+                    </UpdateGroupModel>
+                    <MenuItem
+                      paddingY={2}
+                      onClick={() => {
+                        handleRemove(user);
+                      }}
+                    >
+                      Exit Group{" "}
+                    </MenuItem>
+                    {/* <ProfileModel user={user}></ProfileModel> */}
+                  </MenuList>
+                </Menu>
               </>
             ) : (
               <>
@@ -227,7 +314,21 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
                   ></Avatar>
                   {getSender(user, selectedChat.users)}
                 </Box>
-                <ProfileModel user={getSenderFull(user, selectedChat.users)} />
+                <Menu>
+                  <MenuButton
+                    as={IconButton}
+                    aria-label="Options"
+                    variant="ghost"
+                  >
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </MenuButton>
+                  <MenuList fontWeight="light">
+                    <ProfileModel user={user}>
+                      <MenuItem paddingY={2}>Profile</MenuItem>
+                    </ProfileModel>
+                  </MenuList>
+                </Menu>
+                {/* <ProfileModel user={getSenderFull(user, selectedChat.users)} /> */}
               </>
             )}
           </Text>
@@ -286,8 +387,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
               <InputGroup size="md">
                 <Input
                   placeholder="Type Message"
-                  _placeholder={{ color: "black" }}
-                  variant="filled"
                   onChange={handleTyping}
                   value={newMessage}
                   color={color}
@@ -313,7 +412,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
           alignItems="center"
           justifyContent="center"
           h="100%"
+          w="100%"
           flexDirection="column"
+          borderBottom="100px"
+          borderColor="#42CBA5"
         >
           {/* <img src={nochat}></img> */}
           {color == "white" ? <NochatLogoDark /> : <NochatLogoWhitle />}

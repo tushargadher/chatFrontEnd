@@ -29,6 +29,7 @@ const UpdateGroupModel = ({
   bg,
   color,
   fetchAllmessage,
+  children
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { user, selectedChat, setSeletedChat, server } = chatState();
@@ -252,12 +253,12 @@ const UpdateGroupModel = ({
   };
   return (
     <>
-      <IconButton
+      {/* <IconButton
         display="flex"
         icon={<ViewIcon />}
         onClick={onOpen}
-      ></IconButton>
-
+      ></IconButton> */}
+  <span onClick={onOpen}>{children}</span>
       <Modal
         isOpen={isOpen}
         onClose={onClose}

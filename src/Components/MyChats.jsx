@@ -143,7 +143,7 @@ const MyChats = ({ fetchAgain, bg, color, chatBg, toggleColorMode ,ChatsColor}) 
       // p={3}
       bg={bg}
       color={color}
-      w={{ base: "100%", md: "31%" }}
+      w={{ base: "100%", md: "30%" }}
       borderWidth="1px"
       borderColor={bg}
     >

@@ -18,9 +18,6 @@ const ChatLoading = () => {
       <Skeleton height="2.5rem" />
       <Skeleton height="2.5rem" />
       <Skeleton height="2.5rem" />
-      <Skeleton height="2.5rem" />
-      <Skeleton height="2.5rem" />
-      <Skeleton height="2.5rem" />
     </Stack>
   );
 };
