@@ -10,13 +10,18 @@ import {
   InputGroup,
   InputRightElement,
   Button,
+  Img,
 } from "@chakra-ui/react";
 import {
   getSender,
   getSenderFull,
   getSenderProfile,
 } from "../../Config/chatLogic";
-import icon from "../assets/icon.png";
+// import icon from "../assets/icon.png";
+import DarkBgChat from "../assets/DarkBGChat.jpg";
+import LightBgChat from "../assets/LightBgchat.jpg";
+import NochatLogoDark from "./NochatLogoDark";
+import NochatLogoWhitle from "./NochatLogoWhitle";
 import ProfileModel from "./../Components/ProfileModel";
 import ScrollableChats from "./ScrollableChats";
 import UpdateGroupModel from "./UpdateGroupModel";
@@ -187,8 +192,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
         <>
           <Text
             fontSize={{ base: "21px", md: "28px" }}
-            pb={3}
-            px={2}
+            p="0.7rem"
+            // pb={3}
+            // px={2}
             w="100%"
             fontFamily="Work sans"
             display="flex"
@@ -231,11 +237,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
             flexDir="column"
             justifyContent="flex-end" //so new message will in the bottem
             p={3}
-            bg={chatBg}
+            // bg={chatBg}
+            backgroundImage={DarkBgChat}
             color={color}
             w="100%"
             h="100%"
-            borderRadius="lg"
             overflowY="hidden"
           >
             {loading ? (
@@ -284,6 +290,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
                   onChange={handleTyping}
                   value={newMessage}
                   color="black"
+                  bg={bg}
                 />
                 <InputRightElement>
                   <Button
@@ -295,7 +302,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
                     <i class="fa-regular fa-paper-plane"></i>
                   </Button>
                 </InputRightElement>
-              
               </InputGroup>
             </FormControl>
           </Box>
@@ -306,10 +312,31 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
           alignItems="center"
           justifyContent="center"
           h="100%"
+          flexDirection="column"
         >
-          <Text fontSize="2xl" pb={3}>
-            Click on a user to start chatting
-          </Text>
+          {/* <img src={nochat}></img> */}
+          {color == "white" ? <NochatLogoDark /> : <NochatLogoWhitle />}
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            textAlign="center"
+            justifyContent="space-evenly"
+          >
+            <Text fontSize="3xl" pt={3} pb={3}>
+              WhatsApp Web
+            </Text>
+            <Text fontSize="sm" opacity="0.7" fontWeight="light">
+              Send and revice messages without keeping your phone online.
+            </Text>
+            <Text fontSize="sm" pb={3} opacity="0.7" fontWeight="light">
+              Use WhatsApp on up to 4 linked devices and 1 phone at the same
+              time.
+            </Text>
+            <Text fontSize="sm" pb={3} opacity="0.7" fontWeight="light">
+              End to end encrpyted
+            </Text>
+          </Box>
         </Box>
       )}
     </>

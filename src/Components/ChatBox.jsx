@@ -2,6 +2,8 @@ import React from "react";
 import { chatState } from "../../Context/chatProvider";
 import { Box } from "@chakra-ui/react";
 import SingleChat from "./SingleChat";
+import DarkBgChat from "../assets/DarkBGChat.jpg"
+import LightBgChat from "../assets/LightBgchat.jpg"
 const ChatBox = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
   const { selectedChat } = chatState();
   return (
@@ -11,13 +13,12 @@ const ChatBox = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
         display={{ base: selectedChat ? "flex" : "none", md: "flex" }}
         alignItems="center"
         flexDir="column"
-        p={3}
+        // p={3}
         bg={bg}
         color={color}
         w={{ base: "100%", md: "70%" }}
         borderWidth="1px"
         borderColor={bg}
-        borderTopColor="gray.600"
         borderLeftColor={{ base: { bg }, md: "gray.600" }}
       >
         {/* sending parent state from   chats -> chatBox -> SingleChat */}

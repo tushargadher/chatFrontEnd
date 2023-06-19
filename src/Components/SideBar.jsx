@@ -2,54 +2,35 @@ import {
   Box,
   Button,
   Menu,
-  Text,
+  Avatar,
   MenuButton,
   MenuList,
   MenuItem,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  Input,
-  Spinner,
+  IconButton,
 } from "@chakra-ui/react";
-
-import { BellIcon, ChevronDownIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { BellIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Tooltip } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { Avatar } from "@chakra-ui/react";
 import { chatState } from "../../Context/chatProvider";
-import { useDisclosure } from "@chakra-ui/hooks";
 import ProfileModel from "./ProfileModel";
-import axios from "axios";
-import ChatLoading from "./ChatLoading";
-import UserListItem from "./UserListItem";
 import AlertUser from "./AlertUser";
 import { getSender } from "../../Config/chatLogic";
 import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
 import GroupChatModel from "./GroupChatModel";
 const SideBar = ({ bg, color, toggleColorMode }) => {
-  const [search, setSearch] = useState("");
-  const [result, setResult] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [loadingChat, setLoadingChat] = useState(false);
   const {
     user,
-    selectedChat,
+
     setSeletedChat,
-    chats,
-    setChats,
-    server,
+
     notification,
     setNotification,
   } = chatState();
   const toast = useToast();
   const navigate = useNavigate();
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   // logout function
   const handleLogout = () => {
@@ -62,71 +43,6 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
       position: "bottom",
     });
     navigate("/");
-  };
-
-  //search user function
-  const hanldeSearch = async () => {
-    try {
-      setLoading(true);
-      const config = {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      };
-      //api call, return all user expect the logged in user
-      const { data } = await axios.get(
-        `${server}/api/user?search=${search}`,
-        config
-      );
-      setLoading(false);
-      setResult(data);
-    } catch (error) {
-      setLoading(false);
-      toast({
-        title: "Error Occured!",
-        description: "Failed to Load the Sreach Results",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "bottom-left",
-      });
-    }
-  };
-
-  const accessChat = async (userId) => {
-    try {
-      setLoadingChat(true);
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`, //logged in user token
-        },
-      };
-      //api call, to get chat of two user  one logged in user and second is request user
-      const { data } = await axios.post(
-        `${server}/api/chat`,
-        { userId }, //if the key and value are same then no need to write both
-        config
-      );
-      setLoadingChat(false);
-      // console.log(data);
-
-      //if user click on chat which is already in the chats then not render it again
-      if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
-      setSeletedChat(data);
-      //for closing the side dreawer this function is called
-      onClose();
-    } catch (error) {
-      setLoadingChat(false);
-      toast({
-        title: "Error Occured while Fetching the Chats",
-        description: error.response.data,
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "bottom-left",
-      });
-    }
   };
 
   return (
@@ -144,21 +60,19 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
         borderColor={bg}
       >
         {/* search user */}
-        <Tooltip label="Search user to chat" hasArrow placement="bottom-end">
-          <Button variant="ghost" onClick={onOpen}>
-            <i className="fa-sharp fa-solid fa-magnifying-glass"></i>
-            <Text display={{ base: "none", md: "flex" }} px="4" >
-              Search User
-            </Text>
-          </Button>
-        </Tooltip>
 
-        {/* app name */}
+        {/* app name
         <Text fontSize="2xl" display={{ base: "none", md: "flex" }}>
         ChatBox 
-        </Text>
+        </Text> */}
         {/* <Text>Add Delete user functionality</Text> */}
-
+        <Avatar
+          mr={2}
+          size="md"
+          cursor="pointer"
+          name={user.name}
+          src={user.pic}
+        />
         <Box>
           {/* switch theme button */}
           <Tooltip
@@ -204,85 +118,23 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
           {/* user profile menu */}
 
           <Menu>
-            <MenuButton as={Button}>
-              <i className="fa-solid fa-gear"></i>
+            <MenuButton as={IconButton} aria-label="Options" variant="ghost">
+              <i class="fa-solid fa-ellipsis-vertical"></i>
             </MenuButton>
-            <MenuList>
-              <ProfileModel user={user}>
-                <MenuItem paddingY={2}>
-                  <i className="fa-solid fa-user marginRight"></i>Profile
-                </MenuItem>
-              </ProfileModel>
-
+            <MenuList fontWeight="light">
               <GroupChatModel>
-                <MenuItem paddingY={2}>
-                  <i className="fa-solid fa-user-group marginRight"></i>
-                  New Group
-                </MenuItem>
+                <MenuItem paddingY={2}>New Group</MenuItem>
               </GroupChatModel>
+              <ProfileModel user={user}>
+                <MenuItem paddingY={2}>Profile</MenuItem>
+              </ProfileModel>
               <AlertUser handleLogout={handleLogout}>
-                <MenuItem paddingY={2}>
-                  <i className="fa-sharp fa-solid fa-arrow-right-from-bracket marginRight"></i>
-                  Log Out
-                </MenuItem>
+                <MenuItem paddingY={2}>Log Out</MenuItem>
               </AlertUser>
-         
             </MenuList>
           </Menu>
         </Box>
       </Box>
-
-      {/* search user drawver */}
-
-      <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
-        <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader>Search Users</DrawerHeader>
-
-          <DrawerBody>
-            <Box display="flex" marginBottom={3}>
-              <Input
-                placeholder="Enter Name or Email"
-                mr={2}
-                value={search}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                  hanldeSearch();
-                }}
-              />
-              {/* <Button onClick={hanldeSearch}>Go</Button> */}
-            </Box>
-
-            {loading ? (
-              <ChatLoading />
-            ) : (
-              result?.map((user) => (
-                <UserListItem
-                  key={user._id}
-                  user={user}
-                  //sending user id of which user click on
-                  handleFunction={() => accessChat(user._id)}
-                />
-              ))
-            )}
-            {loadingChat && (
-              <>
-                <Box display="flex" alignItems="center">
-                  <Spinner
-                    thickness="3px"
-                    speed="0.65s"
-                    emptyColor="gray.200"
-                    color="blue.500"
-                    size="md"
-                    margin={2}
-                  />
-                  <Text>Please Wait...</Text>
-                </Box>{" "}
-              </>
-            )}
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
     </>
   );
 };

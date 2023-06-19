@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { chatState } from "../../Context/chatProvider";
 import { Box, useColorMode, useColorModeValue } from "@chakra-ui/react";
-import SideBar from "./SideBar";
+
 import MyChats from "./MyChats";
 import ChatBox from "./ChatBox";
 
@@ -13,23 +13,30 @@ const Chats = () => {
   const [fetchAgain, setFetchAgain] = useState(false);
   const { user } = chatState();
   const { colorMode, toggleColorMode } = useColorMode();
-  const bg = useColorModeValue("white", "gray.900");
+  const bg = useColorModeValue("#F0F2F5", "#222E35");
   const color = useColorModeValue("black", "white");
+  const ChatsColor = useColorModeValue("white", "#111B21");
   const chatBg = useColorModeValue("#E8E8E8", "gray.500");
 
   return (
     <>
       <div style={{ width: "100%" }}>
-        {user && (
-          <SideBar bg={bg} color={color} toggleColorMode={toggleColorMode} />
-        )}
-        <Box display="flex" justifyContent="space-between" w="100%" h="91.5vh">
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          w="100%"
+          h="100vh"
+          // padding="5"
+          padding={{ base: 0, md: 5 }}
+        >
           {user && (
             <MyChats
               fetchAgain={fetchAgain}
               bg={bg}
               color={color}
               chatBg={chatBg}
+              toggleColorMode={toggleColorMode}
+              ChatsColor={ChatsColor}
             />
           )}
           {user && (
