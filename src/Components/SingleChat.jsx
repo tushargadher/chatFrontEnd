@@ -238,7 +238,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
             justifyContent="flex-end" //so new message will in the bottem
             p={3}
             // bg={chatBg}
-            backgroundImage={DarkBgChat}
+            backgroundImage={color == "white" ? DarkBgChat : LightBgChat}
+            // backgroundImage={}`
             color={color}
             w="100%"
             h="100%"

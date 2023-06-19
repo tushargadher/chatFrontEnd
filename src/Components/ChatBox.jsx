@@ -2,8 +2,6 @@ import React from "react";
 import { chatState } from "../../Context/chatProvider";
 import { Box } from "@chakra-ui/react";
 import SingleChat from "./SingleChat";
-import DarkBgChat from "../assets/DarkBGChat.jpg"
-import LightBgChat from "../assets/LightBgchat.jpg"
 const ChatBox = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
   const { selectedChat } = chatState();
   return (

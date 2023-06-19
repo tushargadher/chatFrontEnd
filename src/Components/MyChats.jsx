@@ -197,7 +197,7 @@ const MyChats = ({ fetchAgain, bg, color, chatBg, toggleColorMode ,ChatsColor}) 
                 onClick={() => setSeletedChat(chat)}
                 cursor="pointer"
                 bg={selectedChat === chat ? bg : ""}
-                color={selectedChat === chat ? "white" : "black"}
+                
                 px={3}
                 py={2}
                 key={chat._id}
