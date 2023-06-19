@@ -289,15 +289,15 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
                   variant="filled"
                   onChange={handleTyping}
                   value={newMessage}
-                  color="black"
+                  color={color}
                   bg={bg}
                 />
                 <InputRightElement>
                   <Button
                     onClick={sendMessage}
                     cursor="pointer"
-                    bg="gray.300"
-                    color="black"
+                    bg={bg}
+                    color={color}
                   >
                     <i class="fa-regular fa-paper-plane"></i>
                   </Button>
