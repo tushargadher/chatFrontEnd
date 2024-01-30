@@ -85,7 +85,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
         if (!notification.includes(newMessageRecieved)) {
           setNotification([newMessageRecieved, ...notification]);
           setFetchAgain(!fetchAgain);
-          console.log(newMessageRecieved);
+          // console.log(newMessageRecieved);
         }
       } else {
         setMessages([...messages, newMessageRecieved]);
@@ -125,7 +125,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
       user2._id === user._id ? setSeletedChat() : setSeletedChat(data);
       setFetchAgain(!fetchAgain);
       fetchAllmessage();
-      console.log(data);
+      // console.log(data);
       setLoading(false);
       toast({
         title: `Group Deleted successfully.`,
@@ -245,7 +245,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
   }, [selectedChat]);
   return (
     <>
-      {/* {console.log(notification)} */}
+      {/* {console.log(selectedChat)} */}
       {selectedChat ? (
         <>
           <Text
@@ -270,7 +270,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
                   <Text fontSize="2xl">{selectedChat.chatName}</Text>
                   <Box display="flex">
                     {selectedChat.users.map((member) => (
-                      <Text fontSize="xs" opacity="0.8">{member.name} ,</Text>
+                      <Text fontSize="xs" opacity="0.8">
+                        {member.name} ,
+                      </Text>
                     ))}
                   </Box>
                 </Box>
@@ -300,11 +302,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
                     >
                       Exit Group{" "}
                     </MenuItem>
-                    {/* <ProfileModel user={user}></ProfileModel> */}
                   </MenuList>
                 </Menu>
               </>
             ) : (
+              // if it is not group chat
               <>
                 <Box display="flex" alignItems="center">
                   <Avatar
@@ -323,9 +325,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                   </MenuButton>
                   <MenuList fontWeight="light">
-                    <ProfileModel user={user}>
+                    <ProfileModel
+                      user={getSenderFull(user, selectedChat.users)}
+                    >
                       <MenuItem paddingY={2}>Profile</MenuItem>
                     </ProfileModel>
+                    {/* <MenuItem>Test</MenuItem> */}
                   </MenuList>
                 </Menu>
                 {/* <ProfileModel user={getSenderFull(user, selectedChat.users)} /> */}

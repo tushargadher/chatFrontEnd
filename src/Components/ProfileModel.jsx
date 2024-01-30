@@ -20,7 +20,7 @@ const ProfileModel = ({ user, children }) => {
   return (
     <>
       {/* if the children is not there then display eye icon */}
-
+      {/* {console.log(user)} */}
       {children ? (
         <span onClick={onOpen}>{children}</span>
       ) : (
@@ -65,11 +65,12 @@ const ProfileModel = ({ user, children }) => {
               </Box>
               <Box bg="" padding={3}>
                 <Text fontSize="1rem" padding="0.5rem">
-                <i class="fa-solid fa-user marginRight"></i> {user.name}
+                  <i class="fa-solid fa-user marginRight"></i> {user.name}
                 </Text>
 
                 <Text fontSize="1rem" padding="0.5rem">
-                <i class="fa-regular fa-envelope marginRight"></i>{user.email}
+                  <i class="fa-regular fa-envelope marginRight"></i>
+                  {user.email}
                 </Text>
               </Box>
             </Box>

@@ -93,7 +93,7 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
               />
               <BellIcon fontSize="2xl" m={1}></BellIcon>
             </MenuButton>
-            <MenuList pl={3} >
+            <MenuList pl={3}>
               {!notification.length && "No New Messages"}
               {notification.map((notify) => (
                 <MenuItem
@@ -121,7 +121,7 @@ const SideBar = ({ bg, color, toggleColorMode }) => {
             <MenuButton as={IconButton} aria-label="Options" variant="ghost">
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </MenuButton>
-            <MenuList fontWeight="light" fontSize="sm">
+            <MenuList fontWeight="light" fontSize="sm"  placement="left">
               <GroupChatModel>
                 <MenuItem paddingY={2}>New Group</MenuItem>
               </GroupChatModel>

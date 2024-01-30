@@ -136,10 +136,11 @@ const SignUp = () => {
         cpassword: "",
       });
     } catch (error) {
+      console.log(error);
       toast({
         title: "Something went wrong. User Registration Failed !",
         status: "error",
-        description: error.response.data,
+        // description: error.response.data,
         duration: 5000,
         isClosable: true,
         position: "bottom",
@@ -208,7 +209,7 @@ const SignUp = () => {
           />
           <InputRightElement width="4.5rem " color="black">
             <Button h="1.75rem" size="sm" onClick={handleShow}>
-            {show ? <ViewOffIcon /> : <ViewIcon />}
+              {show ? <ViewOffIcon /> : <ViewIcon />}
             </Button>
           </InputRightElement>
         </InputGroup>
