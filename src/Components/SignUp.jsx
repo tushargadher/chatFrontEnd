@@ -48,11 +48,10 @@ const SignUp = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(pic);
-          console.log(data.url);
+      
           setPic(data.url.toString());
           setLoading(false);
-          console.log(pic);
+    
         })
         .catch((err) => {
           console.log(err);

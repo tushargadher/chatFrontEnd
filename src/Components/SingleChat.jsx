@@ -63,6 +63,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain, bg, color, chatBg }) => {
 
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
+  console.log(server);
 
   useEffect(() => {
     socket = io(server);

@@ -22,7 +22,14 @@ import { useDisclosure } from "@chakra-ui/hooks";
 import SideBar from "./SideBar";
 import ChatLoading from "./ChatLoading";
 import UserListItem from "./UserListItem";
-const MyChats = ({ fetchAgain, bg, color, chatBg, toggleColorMode ,ChatsColor}) => {
+const MyChats = ({
+  fetchAgain,
+  bg,
+  color,
+  chatBg,
+  toggleColorMode,
+  ChatsColor,
+}) => {
   const {
     user,
     setUser,
@@ -119,9 +126,10 @@ const MyChats = ({ fetchAgain, bg, color, chatBg, toggleColorMode ,ChatsColor}) 
 
       setChats(data);
     } catch (error) {
+      console.log(error.message);
       toast({
         title: "Error Occured while Fetching the Chats",
-        description: error.response.data,
+        description: error.message,
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -197,14 +205,12 @@ const MyChats = ({ fetchAgain, bg, color, chatBg, toggleColorMode ,ChatsColor}) 
                 onClick={() => setSeletedChat(chat)}
                 cursor="pointer"
                 bg={selectedChat === chat ? bg : ""}
-                
                 px={3}
                 py={2}
                 key={chat._id}
                 color={color}
                 display="flex"
                 alignItems="center"
-              
               >
                 <Avatar
                   src={getSenderProfile(loggedUser, chat.users)}
