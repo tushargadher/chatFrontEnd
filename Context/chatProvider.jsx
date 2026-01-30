@@ -9,7 +9,7 @@ const ChatProvider = ({ children }) => {
   const [notification, setNotification] = useState([]);
   const navigate = useNavigate();
   // const server = "http://localhost:5000";
-  const server = "http://ChatApp.tushargadher25.repl.co";
+  const server = "https://chatbackend-6vsl.onrender.com";
 
   useEffect(() => {
     //getting info of logged in user
